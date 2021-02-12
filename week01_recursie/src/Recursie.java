@@ -79,19 +79,48 @@ public class Recursie {
 
     // oefening 6
     public static String changeXY(String s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(s == null){
+            throw new IllegalArgumentException("null obj");
+        }
+        if(s.length()==0){
+            return s;
+        }
+        if(s.length()==1){
+            if(s.equalsIgnoreCase("x")){
+                return "y";
+            }
+            if(s.equalsIgnoreCase("y")){
+                return "x";
+            }
+            return s;
+        }
+        return changeXY(s.substring(0, s.length()-1))+changeXY(s.substring(s.length()-1,s.length()));
+        
     }
 
     // oefening 7
-
     public static String changePi(String s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(s == null){
+            throw new IllegalArgumentException("null obj");
+        }
+        System.out.println(s);
+        if(s.length()<=1){
+            return s;
+        }else{
+            if ((s.substring(0, 2)).equals("pi")){
+                return "3.14"+changePi(s.substring(2));
+        }else{
+            return s.charAt(0)+changePi(s.substring(1));
+        }
+        }
     }
 
     // oefening 8:
-    public static int tweelog(int getal) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    // public static int tweelog(int getal) {
+    //     if(getal<=1){
+    //         return (int) 0;
+    //     }
+    // }
 
     // oefening 9;
     public static double findMaximum(List<Double> lijst) {
