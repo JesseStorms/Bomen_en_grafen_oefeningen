@@ -7,29 +7,74 @@ public class Recursie {
     // Oefening 1: n-de Fibonacci-getal
 
     public static int fibonacci(int getal) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(getal<=0){
+            throw new IllegalArgumentException("bad num");
+        }
+        if(getal <= 2){
+            return 1;
+        }
+            return fibonacci(getal-1)+fibonacci(getal-2);
+        
     }
 
     // Oefening 2 : som van cijfers
 
     public static int somVanCijfers(int getal) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(Math.abs(getal)==0){
+            return 0;
+        }
+        return Math.abs(getal)%10 + somVanCijfers(Math.abs(getal)/10);
     }
 
     // Oefening 3: keer een string om
     public static String keerOm(String s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(s == null){
+            throw new IllegalArgumentException("empty?");
+        }
+        if(s.length()==0){
+            return "";
+        }
+        if(s.length()==1){
+            return s;
+        }
+        return s.charAt(s.length()-1)+keerOm(s.substring(0,s.length()-1));
     }
 
     //oefening 4: countX
 
     public static int countX(String s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(s == null){
+            throw new IllegalArgumentException("null obj");
+        }
+        if(s.length()==0){
+            return 0;
+        }
+        if(s.length()==1){
+            if(s.equalsIgnoreCase("x")){
+                return 1;
+            }
+            return 0;
+        }
+        return countX(s.substring(0, s.length()-1))+countX(s.substring(s.length()-1,s.length()));
+        
     }
 
     //oefening 5 : countHi
     public static int countHi(String s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(s == null){
+            throw new IllegalArgumentException("null obj");
+        }
+        if(s.length()<2){
+            return 0;
+        }
+        if(s.length()==2){
+            if(s.equalsIgnoreCase("hi")){
+                return 1;
+            }
+            return 0;
+        }
+        return countHi(s.substring(0, s.length()-1))+countHi(s.substring(s.length()-2,s.length()));
+        
     }
 
     // oefening 6
