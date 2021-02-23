@@ -20,6 +20,14 @@ public class BinaryTreeDriver {
 		// boom heeft root C en heeft links A en rechts G
 		BinaryTree<String> boom = new BinaryTree<>("C",nodeA, nodeG);
 		boom.printPreorder();
+		System.out.println("");
+		boom.printPostOrder();
+		System.out.println("");
+		boom.printInOrder();
+		System.out.println("");
+		System.out.println(boom.getNodes());
+		System.out.println("");
+		System.out.println(boom.getDepth());
 	}
 
 }

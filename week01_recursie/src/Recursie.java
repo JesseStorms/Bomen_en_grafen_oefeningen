@@ -116,15 +116,34 @@ public class Recursie {
     }
 
     // oefening 8:
-    // public static int tweelog(int getal) {
-    //     if(getal<=1){
-    //         return (int) 0;
-    //     }
-    // }
+    public static int tweelog(int getal) {
+        if(getal<=0){
+            throw new IllegalArgumentException("nega num??");
+        }
+        if(getal<2){
+            return 0;
+        }
+        return 1+tweelog(getal/2);
+    }
 
     // oefening 9;
     public static double findMaximum(List<Double> lijst) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(lijst == null){
+            throw new IllegalArgumentException("empty list?");
+        }
+        if(lijst.isEmpty()){
+            throw new IllegalArgumentException("empty list?");
+        }
+        if(lijst.size()==1){
+            return lijst.get(0);
+        }
+        if(lijst.size()==2){
+            return Math.max(lijst.get(1),lijst.get(0));
+        }
+        List<Double> first = lijst.subList(0, 2);
+        List<Double> second = lijst.subList(3, lijst.size());
+        return Math.max(findMaximum(first),findMaximum(second));
+
     }
 
     // oefening 10;
