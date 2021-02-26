@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class BinaryTree<E>{
 	E data;
 	BinaryTree<E> leftTree, rightTree;
@@ -21,6 +24,9 @@ public class BinaryTree<E>{
 			if (this.leftTree != null) this.leftTree.printInorder();
 			System.out.print(this.data + " ");
 			if (this.rightTree != null) this.rightTree.printInorder();
+	}
+	public String getData(){
+		return this.data.toString();
 	}
 
 
@@ -45,4 +51,9 @@ public class BinaryTree<E>{
 		throw new UnsupportedOperationException("Should not be implemented, implement in BinarySearchTree file");
 	}
 
+	protected void cleanUp() {
+	}
+	protected ArrayList<E> getPath(E data){
+		return null;
+	}
 }
