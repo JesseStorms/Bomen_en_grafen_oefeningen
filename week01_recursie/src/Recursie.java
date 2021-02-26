@@ -43,7 +43,20 @@ public class Recursie {
     //oefening 4: countX
 
     public static int countX(String s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if(s == null){
+            throw new IllegalArgumentException("null obj");
+        }
+        if(s.length()==0){
+            return 0;
+        }
+        if(s.length()==1){
+            if(s.equalsIgnoreCase("x")){
+                return 1;
+            }
+            return 0;
+        }
+        return countX(s.substring(0, s.length()-1))+countX(s.substring(s.length()-1,s.length()));
+
     }
 
     //oefening 5 : countHi
