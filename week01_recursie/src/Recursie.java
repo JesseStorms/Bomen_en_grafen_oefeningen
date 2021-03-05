@@ -56,7 +56,7 @@ public class Recursie {
             return 0;
         }
         return countX(s.substring(0, s.length()-1))+countX(s.substring(s.length()-1,s.length()));
-        
+
     }
 
     //oefening 5 : countHi
