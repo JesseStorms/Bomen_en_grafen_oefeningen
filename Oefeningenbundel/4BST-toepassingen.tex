@@ -101,7 +101,7 @@ child { node {C} }
 \code Gegeven de implementatie van een binaire boom zoals in les 2 gegeven.
 De bedoeling van deze oefening is het aantal voorkomens van een gegeven data-veld in een binaire boom te tellen.
 \begin{oefenumerate}
-\item Implementeer een methode \verb+count+ in de \verb+BinaryTree+ klasse die het aantal voorkomens van een gegeven data-veld telt in een boom.
+\item Implementeer een methode \verb+count+ in de \verb+domain.BinaryTree+ klasse die het aantal voorkomens van een gegeven data-veld telt in een boom.
 \item Maak een nieuwe \verb+BinaryTreeDriver+ klasse waarin je de boom overeenkomstig figuur~\ref{fig:herhalingsoefbb} maakt.
 \begin{figure}[htbp]
     \centering
@@ -195,7 +195,7 @@ Mogelijke oplossingen: nr 1, 3 en 4
 \begin{oef}
 \code Zoek de knopen op een bepaalde afstand.
 \begin{oefenumerate}
-\item Schrijf een methode \verb=getNodesAtDistance(k)= in de \verb+BinaryTree+ klasse die een lijst teruggeeft van de datavelden die op een afstand $k$ van de wortel van de binaire boom verwijderd zijn. In de boom uit figuur~\ref{fig:herhalingsoefbb} zijn A, H en I de datavelden van knopen die op een afstand 2 van de root verwijderd zijn.
+\item Schrijf een methode \verb=getNodesAtDistance(k)= in de \verb+domain.BinaryTree+ klasse die een lijst teruggeeft van de datavelden die op een afstand $k$ van de wortel van de binaire boom verwijderd zijn. In de boom uit figuur~\ref{fig:herhalingsoefbb} zijn A, H en I de datavelden van knopen die op een afstand 2 van de root verwijderd zijn.
 \item Test je implementatie uit door in de klasse \verb+BBDriver+ de methode \verb+getNodesAtDistance+ op te roepen met parameters 0, 1, 2, 3 en 4. Verwachte uitvoer: \\
 Datavelden van knopen verwijderd op een afstand van 0 van de root = [A]\\
 Datavelden van knopen verwijderd op een afstand van 1 van de root = [H, G]\\
@@ -1089,7 +1089,7 @@ child { node {op}
 
 
 \begin{oef}
-\code \emph{(Examen augustus 2017)} Herneem de domainklasse van Binary Tree. Schrijf in deze klasse een methode \verb/deelZonder(E wortelInfo)/ die een nieuwe \verb+BinaryTree<E>+ teruggeeft die gelijk is aan deze boom zonder de deelboom met als wortel de knoop met dataveld wortelInfo. Deze methode geeft \verb+null+ terug indien de parameter niet voorkomt in deze binary tree.
+\code \emph{(Examen augustus 2017)} Herneem de domainklasse van Binary Tree. Schrijf in deze klasse een methode \verb/deelZonder(E wortelInfo)/ die een nieuwe \verb+domain.BinaryTree<E>+ teruggeeft die gelijk is aan deze boom zonder de deelboom met als wortel de knoop met dataveld wortelInfo. Deze methode geeft \verb+null+ terug indien de parameter niet voorkomt in deze binary tree.
 
 \begin{figure}[htbp]
     \centering
@@ -1137,28 +1137,28 @@ UI-klasse:
 public class BinaryTreeDriver {
 
     public static void main(String[] args) {
-        BinaryTree<String> nodeA = new BinaryTree<>("A");
-        BinaryTree<String> nodeC = new BinaryTree<>("C");
-        BinaryTree<String> nodeE = new BinaryTree<>("E");
-        BinaryTree<String> nodeH = new BinaryTree<>("H");
-        BinaryTree<String> nodeD = new BinaryTree<>("D", nodeC, nodeE);
-        BinaryTree<String> nodeB = new BinaryTree<>("B", nodeA, nodeD);
-        BinaryTree<String> nodeI = new BinaryTree<>("I", nodeH, null);
-        BinaryTree<String> nodeG = new BinaryTree<>("G", null, nodeI);
-        BinaryTree<String> boom = new BinaryTree<>("F", nodeB, nodeG);
+        domain.BinaryTree<String> nodeA = new domain.BinaryTree<>("A");
+        domain.BinaryTree<String> nodeC = new domain.BinaryTree<>("C");
+        domain.BinaryTree<String> nodeE = new domain.BinaryTree<>("E");
+        domain.BinaryTree<String> nodeH = new domain.BinaryTree<>("H");
+        domain.BinaryTree<String> nodeD = new domain.BinaryTree<>("D", nodeC, nodeE);
+        domain.BinaryTree<String> nodeB = new domain.BinaryTree<>("B", nodeA, nodeD);
+        domain.BinaryTree<String> nodeI = new domain.BinaryTree<>("I", nodeH, null);
+        domain.BinaryTree<String> nodeG = new domain.BinaryTree<>("G", null, nodeI);
+        domain.BinaryTree<String> boom = new domain.BinaryTree<>("F", nodeB, nodeG);
 
         System.out.println("\nVolledige boom preorder:");
         boom.printPreorder();
         System.out.println("\nVolledige boom inorder:");
         boom.printInOrder();
 
-        BinaryTree<String> boomZonderI = boom.deelZonder("I");
+        domain.BinaryTree<String> boomZonderI = boom.deelZonder("I");
         System.out.println("\nBoom zonder I preorder: ");
         boomZonderI.printPreorder();
         System.out.println("\nBoom zonder I inorder: ");
         boomZonderI.printInOrder();
 
-        BinaryTree<String> boomZonderB = boom.deelZonder("B");
+        domain.BinaryTree<String> boomZonderB = boom.deelZonder("B");
         System.out.println("\nBoom zonder B preorder: ");
         boomZonderB.printPreorder();
         System.out.println("\nBoom zonder B inorder: ");
@@ -1185,7 +1185,7 @@ F G H I
 \end{lstlisting}
 \begin{opl}
 \begin{lstlisting}
-   public BinaryTree<E> deelZonder(E wortelInfo) {
+   public domain.BinaryTree<E> deelZonder(E wortelInfo) {
         if (wortelInfo == null || !this.contains(wortelInfo))
             return null;
         // wortelInfo == data, dus hele boom verwijderen
@@ -1194,13 +1194,13 @@ F G H I
         }
         // wortelInfo = linkerkind van data, dus hele linkertak verwijderen
         if (this.leftTree!=null && this.leftTree.data.equals(wortelInfo)){
-            return new BinaryTree(this.data,null,this.rightTree);
+            return new domain.BinaryTree(this.data,null,this.rightTree);
         }
         // wortelInfo == rechterkind van data, dus hele rechtertak verwijderen
         if (this.rightTree!= null && this.rightTree.equals(wortelInfo)){
-            return new BinaryTree(this.data,this.rightTree,null);
+            return new domain.BinaryTree(this.data,this.rightTree,null);
         }
-        BinaryTree newLeftTree, newRightTree;
+        domain.BinaryTree newLeftTree, newRightTree;
         // als wortelInfo in linkertak zit: nieuwe linkertak maken zonder wortelInfo
         if (this.leftTree != null && this.leftTree.contains(wortelInfo))
             newLeftTree = this.leftTree.deelZonder(wortelInfo);
@@ -1212,7 +1212,7 @@ F G H I
         else
             newRightTree = this.rightTree;
         // resulterende boom terug samenstellen
-        return new BinaryTree<>(this.data,newLeftTree,newRightTree);
+        return new domain.BinaryTree<>(this.data,newLeftTree,newRightTree);
     }
 \end{lstlisting}
 \end{opl}
@@ -1224,21 +1224,21 @@ F G H I
 \begin{oef}
 \code \emph{(Examen juni 2018)} We noemen een binaire boom \emph{strikt} als alle knopen ofwel 0 ofwel 2 (dus niet 1!) kinderen hebben. Schrijf een methode \verb+isStrikt(): boolean+ die van een gegeven binaire boom nakijkt of hij strikt is. 
 
-Vertrek van de klasse \verb+BinaryTree<E>+ die we definieerden in de les:
+Vertrek van de klasse \verb+domain.BinaryTree<E>+ die we definieerden in de les:
 \begin{lstlisting}	
 package domain;
 
 import java.util.ArrayList;
 
-public class BinaryTree<E> {
+public class domain.BinaryTree<E> {
 	private E data;
-	private BinaryTree<E> leftTree, rightTree;
+	private domain.BinaryTree<E> leftTree, rightTree;
 	
-	public BinaryTree(E data){
+	public domain.BinaryTree(E data){
 		this(data,null,null);
 	}
 	
-	public BinaryTree(E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree){
+	public domain.BinaryTree(E data, domain.BinaryTree<E> leftTree, domain.BinaryTree<E> rightTree){
 		this.data= data;
 		this.leftTree= leftTree;
 		this.rightTree= rightTree;
@@ -1302,7 +1302,7 @@ binaire boom met node E en kinderen R en P strikt? -> true
 UI klasse:
 \begin{lstlisting}
     public static void main(String[] args) {
-        BinarySearchTree<Integer> boom = new BinarySearchTree<>();
+        domain.BinarySearchTree<Integer> boom = new domain.BinarySearchTree<>();
         boom.addNode(6);
         boom.addNode(4);
         boom.addNode(8);
@@ -1339,8 +1339,8 @@ In tegenstelling tot \verb/printInOrder()/ schrijven we de waarden nu niet uit n
 Tenslotte hoef je niet steeds te zoeken over het volledige interval. Immers, in een BST zijn de elementen links van wortel kleiner dan wortel en rechts ervan groter. Je kan het interval waarin je zoekt dus steeds kleiner maken.
 
 \begin{lstlisting}
-public class BinarySearchTree<E extends Comparable<E>> {
-    private BinaryTree<E> root;
+public class domain.BinarySearchTree<E extends Comparable<E>> {
+    private domain.BinaryTree<E> root;
 
    ...
    
@@ -1350,9 +1350,9 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return this.root.geefKnopenBinnenInterval(min, max);
     }
 
-    private class BinaryTree<E extends Comparable<E>> {
+    private class domain.BinaryTree<E extends Comparable<E>> {
         private E data;
-        private BinaryTree<E> leftTree, rightTree;
+        private domain.BinaryTree<E> leftTree, rightTree;
 
 	...
 	

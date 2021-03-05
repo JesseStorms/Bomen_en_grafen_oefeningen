@@ -222,30 +222,30 @@ child { node {G}
 \begin{lstlisting}[caption={Binaire boom uit oefening 1}, label=binoef1]
 package ui;
 
-import domain.BinaryTree;
+import domain.domain.BinaryTree;
 
 public class BinaryTreeDriver2 {
 
 	public static void main(String[] args) {
 		//begin bij de bladeren ...
-		BinaryTree<String> nodeA = new BinaryTree<>("A");
-		BinaryTree<String> nodeC = new BinaryTree<>("C");
-		BinaryTree<String> nodeE = new BinaryTree<>("E");
-		BinaryTree<String> nodeH = new BinaryTree<>("H");
+		domain.BinaryTree<String> nodeA = new domain.BinaryTree<>("A");
+		domain.BinaryTree<String> nodeC = new domain.BinaryTree<>("C");
+		domain.BinaryTree<String> nodeE = new domain.BinaryTree<>("E");
+		domain.BinaryTree<String> nodeH = new domain.BinaryTree<>("H");
 
 		// ... ga vervolgens naar alle interne knopen ...
 		// knoop I heeft links H en rechts niets
-		BinaryTree<String> nodeI = new BinaryTree<>("I",nodeH, null);
+		domain.BinaryTree<String> nodeI = new domain.BinaryTree<>("I",nodeH, null);
 		// knoop G heeft links niets en rechts I
-		BinaryTree<String> nodeG = new BinaryTree<>("G",null, nodeI);
+		domain.BinaryTree<String> nodeG = new domain.BinaryTree<>("G",null, nodeI);
 		// knoop D heeft links C en rechts E
-		BinaryTree<String> nodeD = new BinaryTree<>("D",nodeC,nodeE);
+		domain.BinaryTree<String> nodeD = new domain.BinaryTree<>("D",nodeC,nodeE);
 		// knoop B heeft links A en rechts D
-		BinaryTree<String> nodeB = new BinaryTree<>("B",nodeA, nodeD);
+		domain.BinaryTree<String> nodeB = new domain.BinaryTree<>("B",nodeA, nodeD);
 		
 		// ... en eindig met de wortel
 		// boom heeft root F en heeft links B en rechts G
-		BinaryTree<String> boom = new BinaryTree<>("F",nodeB, nodeG);
+		domain.BinaryTree<String> boom = new domain.BinaryTree<>("F",nodeB, nodeG);
 		boom.printPreorder();
 	}
 
@@ -257,7 +257,7 @@ public class BinaryTreeDriver2 {
 
 \end{Oplossing}
 \begin{Oplossing}{2.3}
-In het \verb+domain+ package voeg je in \verb+BinaryTree.java+ volgende methode in:
+In het \verb+domain+ package voeg je in \verb+domain.BinaryTree.java+ volgende methode in:
 \begin{lstlisting}[caption={In-order doorloop van een binaire boom}, label=bininorder]
 public void printInorder(){
 	if (this.leftTree != null) {
@@ -272,7 +272,7 @@ public void printInorder(){
 
 \end{Oplossing}
 \begin{Oplossing}{2.4}
-In het \verb+domain+ package voeg je in \verb+BinaryTree.java+ volgende methode in:
+In het \verb+domain+ package voeg je in \verb+domain.BinaryTree.java+ volgende methode in:
 \begin{lstlisting}[caption={Post-order doorloop van een binaire boom}, label=binpostorder]
 public void printPostorder(){
 	if (this.leftTree != null) {
@@ -286,7 +286,7 @@ public void printPostorder(){
 \end{lstlisting}
 \end{Oplossing}
 \begin{Oplossing}{2.5}
-Je vindt het correcte aantal knopen (9) bvb. met de methode \verb+countNodes+ die je implementeert in \verb+BinaryTree.java+. Vanzelfsprekend kan je met \verb+if+ constructies werken, maar de \emph{ternaire operator} van java maakt de code wel een stuk kernachtiger (listing~\ref{bincountnodes}).
+Je vindt het correcte aantal knopen (9) bvb. met de methode \verb+countNodes+ die je implementeert in \verb+domain.BinaryTree.java+. Vanzelfsprekend kan je met \verb+if+ constructies werken, maar de \emph{ternaire operator} van java maakt de code wel een stuk kernachtiger (listing~\ref{bincountnodes}).
 \begin{lstlisting}[caption={Tel het aantal knopen in een binaire boom}, label=bincountnodes]
 public int countNodes() {
 	return 1 + (this.leftTree == null ? 0 : this.leftTree.countNodes())
@@ -295,7 +295,7 @@ public int countNodes() {
 \end{lstlisting}
 \end{Oplossing}
 \begin{Oplossing}{2.6}
-Je vindt de maximale diepte van een boom met de methode \verb+getMaxDepth+ die je implementeert in \verb+BinaryTree.java+. Ook hier weer een oplossing met de \emph{ternaire operator} van java (listing~\ref{bingetmaxdepth}).
+Je vindt de maximale diepte van een boom met de methode \verb+getMaxDepth+ die je implementeert in \verb+domain.BinaryTree.java+. Ook hier weer een oplossing met de \emph{ternaire operator} van java (listing~\ref{bingetmaxdepth}).
 \begin{lstlisting}[caption={De diepte van een binaire boom}, label=bingetmaxdepth]
 public int getDepth() {
 	return 1 + Math.max((this.leftTree == null ? 0 : this.leftTree.getDepth()),
@@ -418,11 +418,11 @@ public boolean addNode(E data) {
 		return false; //geen twee keer zelfde data in BST
 	} else if (this.data.compareTo(data) > 0) {//ga naar linkersubboom
 		if (this.leftTree == null) {
-			this.leftTree = new BinarySearchTree<>(data);
+			this.leftTree = new domain.BinarySearchTree<>(data);
 			return true;
 		} else return (this.leftTree.addNode(data));
 	} else if (this.rightTree == null) {
-		this.rightTree = new BinarySearchTree<>(data);
+		this.rightTree = new domain.BinarySearchTree<>(data);
 		return true;
 	} else return (this.rightTree.addNode(data));
 }
@@ -1224,7 +1224,7 @@ child { node {op}
 \end{Oplossing}
 \begin{Oplossing}{4.20}
 \begin{lstlisting}
-   public BinaryTree<E> deelZonder(E wortelInfo) {
+   public domain.BinaryTree<E> deelZonder(E wortelInfo) {
         if (wortelInfo == null || !this.contains(wortelInfo))
             return null;
         // wortelInfo == data, dus hele boom verwijderen
@@ -1233,13 +1233,13 @@ child { node {op}
         }
         // wortelInfo = linkerkind van data, dus hele linkertak verwijderen
         if (this.leftTree!=null && this.leftTree.data.equals(wortelInfo)){
-            return new BinaryTree(this.data,null,this.rightTree);
+            return new domain.BinaryTree(this.data,null,this.rightTree);
         }
         // wortelInfo == rechterkind van data, dus hele rechtertak verwijderen
         if (this.rightTree!= null && this.rightTree.equals(wortelInfo)){
-            return new BinaryTree(this.data,this.rightTree,null);
+            return new domain.BinaryTree(this.data,this.rightTree,null);
         }
-        BinaryTree newLeftTree, newRightTree;
+        domain.BinaryTree newLeftTree, newRightTree;
         // als wortelInfo in linkertak zit: nieuwe linkertak maken zonder wortelInfo
         if (this.leftTree != null && this.leftTree.contains(wortelInfo))
             newLeftTree = this.leftTree.deelZonder(wortelInfo);
@@ -1251,7 +1251,7 @@ child { node {op}
         else
             newRightTree = this.rightTree;
         // resulterende boom terug samenstellen
-        return new BinaryTree<>(this.data,newLeftTree,newRightTree);
+        return new domain.BinaryTree<>(this.data,newLeftTree,newRightTree);
     }
 \end{lstlisting}
 \end{Oplossing}
@@ -1279,8 +1279,8 @@ In tegenstelling tot \verb/printInOrder()/ schrijven we de waarden nu niet uit n
 Tenslotte hoef je niet steeds te zoeken over het volledige interval. Immers, in een BST zijn de elementen links van wortel kleiner dan wortel en rechts ervan groter. Je kan het interval waarin je zoekt dus steeds kleiner maken.
 
 \begin{lstlisting}
-public class BinarySearchTree<E extends Comparable<E>> {
-    private BinaryTree<E> root;
+public class domain.BinarySearchTree<E extends Comparable<E>> {
+    private domain.BinaryTree<E> root;
 
    ...
 
@@ -1290,9 +1290,9 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return this.root.geefKnopenBinnenInterval(min, max);
     }
 
-    private class BinaryTree<E extends Comparable<E>> {
+    private class domain.BinaryTree<E extends Comparable<E>> {
         private E data;
-        private BinaryTree<E> leftTree, rightTree;
+        private domain.BinaryTree<E> leftTree, rightTree;
 
 	...
 	

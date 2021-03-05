@@ -78,7 +78,7 @@ aan de linkerzijde: de twee kinderen van knoop A ontbreken.
 \begin{oef} 
 \papier \code Voor deze oefening duiken we in de code die je in IntelliJ geïmporteerd hebt.
 \begin{oefenumerate}
-	\item Bestudeer de implementatie van \verb=BinaryTree<E>=. Stel vragen als er onduidelijkheden zijn.
+	\item Bestudeer de implementatie van \verb=domain.BinaryTree<E>=. Stel vragen als er onduidelijkheden zijn.
 	\item Bestudeer de \verb=main= functie in de \verb=BinaryTreeDriver= klasse. Hierin wordt een boom aangemaakt waarmee de functie \verb=printPreorder= wordt geïllustreerd. Deze functie is een recursieve implementatie om de waarden van de knopen in pre-order volgorde af te printen.
 	\item Teken de boom uit de driver klasse op papier.
 	\item Schrijf op papier de verwachte output bij het doorlopen van de boom in pre-order.
@@ -117,30 +117,30 @@ child { node {G}
 \begin{lstlisting}[caption={Binaire boom uit oefening 1}, label=binoef1]
 package ui;
 
-import domain.BinaryTree;
+import domain.domain.BinaryTree;
 
 public class BinaryTreeDriver2 {
 
 	public static void main(String[] args) {
 		//begin bij de bladeren ...
-		BinaryTree<String> nodeA = new BinaryTree<>("A");
-		BinaryTree<String> nodeC = new BinaryTree<>("C");
-		BinaryTree<String> nodeE = new BinaryTree<>("E");
-		BinaryTree<String> nodeH = new BinaryTree<>("H");
+		domain.BinaryTree<String> nodeA = new domain.BinaryTree<>("A");
+		domain.BinaryTree<String> nodeC = new domain.BinaryTree<>("C");
+		domain.BinaryTree<String> nodeE = new domain.BinaryTree<>("E");
+		domain.BinaryTree<String> nodeH = new domain.BinaryTree<>("H");
 
 		// ... ga vervolgens naar alle interne knopen ...
 		// knoop I heeft links H en rechts niets
-		BinaryTree<String> nodeI = new BinaryTree<>("I",nodeH, null);
+		domain.BinaryTree<String> nodeI = new domain.BinaryTree<>("I",nodeH, null);
 		// knoop G heeft links niets en rechts I
-		BinaryTree<String> nodeG = new BinaryTree<>("G",null, nodeI);
+		domain.BinaryTree<String> nodeG = new domain.BinaryTree<>("G",null, nodeI);
 		// knoop D heeft links C en rechts E
-		BinaryTree<String> nodeD = new BinaryTree<>("D",nodeC,nodeE);
+		domain.BinaryTree<String> nodeD = new domain.BinaryTree<>("D",nodeC,nodeE);
 		// knoop B heeft links A en rechts D
-		BinaryTree<String> nodeB = new BinaryTree<>("B",nodeA, nodeD);
+		domain.BinaryTree<String> nodeB = new domain.BinaryTree<>("B",nodeA, nodeD);
 		
 		// ... en eindig met de wortel
 		// boom heeft root F en heeft links B en rechts G
-		BinaryTree<String> boom = new BinaryTree<>("F",nodeB, nodeG);
+		domain.BinaryTree<String> boom = new domain.BinaryTree<>("F",nodeB, nodeG);
 		boom.printPreorder();
 	}
 
@@ -163,7 +163,7 @@ public class BinaryTreeDriver2 {
 	\item Controleer je implementatie met behulp van je testvoorbeeld. Ga ook na of de uitvoer overeenkomt met je antwoord op vraag i) van oefening 2.1.
 \end{oefenumerate}
 \begin{opl}
-In het \verb+domain+ package voeg je in \verb+BinaryTree.java+ volgende methode in:
+In het \verb+domain+ package voeg je in \verb+domain.BinaryTree.java+ volgende methode in:
 \begin{lstlisting}[caption={In-order doorloop van een binaire boom}, label=bininorder]
 public void printInorder(){
 	if (this.leftTree != null) {
@@ -187,7 +187,7 @@ public void printInorder(){
 	\item Controleer je implementatie met behulp van je testvoorbeeld. Ga op die manier ook na of de uitvoer  overeenkomt met je antwoord op vraag j) van oefening 2.1.
 \end{oefenumerate}
 \begin{opl}
-In het \verb+domain+ package voeg je in \verb+BinaryTree.java+ volgende methode in:
+In het \verb+domain+ package voeg je in \verb+domain.BinaryTree.java+ volgende methode in:
 \begin{lstlisting}[caption={Post-order doorloop van een binaire boom}, label=binpostorder]
 public void printPostorder(){
 	if (this.leftTree != null) {
@@ -212,7 +212,7 @@ public void printPostorder(){
 	\item Controleer je implementatie van \verb=countNodes= met behulp van je testvoorbeeld in de \verb=main= functie.
 \end{oefenumerate}
 \begin{opl}
-Je vindt het correcte aantal knopen (9) bvb. met de methode \verb+countNodes+ die je implementeert in \verb+BinaryTree.java+. Vanzelfsprekend kan je met \verb+if+ constructies werken, maar de \emph{ternaire operator} van java maakt de code wel een stuk kernachtiger (listing~\ref{bincountnodes}).
+Je vindt het correcte aantal knopen (9) bvb. met de methode \verb+countNodes+ die je implementeert in \verb+domain.BinaryTree.java+. Vanzelfsprekend kan je met \verb+if+ constructies werken, maar de \emph{ternaire operator} van java maakt de code wel een stuk kernachtiger (listing~\ref{bincountnodes}).
 \begin{lstlisting}[caption={Tel het aantal knopen in een binaire boom}, label=bincountnodes]
 public int countNodes() {
 	return 1 + (this.leftTree == null ? 0 : this.leftTree.countNodes())
@@ -231,7 +231,7 @@ public int countNodes() {
 	\item Controleer je implementatie van \verb=getDepth= met behulp van je testvoorbeeld in de \verb=main= functie.
 \end{oefenumerate}
 \begin{opl}
-Je vindt de maximale diepte van een boom met de methode \verb+getMaxDepth+ die je implementeert in \verb+BinaryTree.java+. Ook hier weer een oplossing met de \emph{ternaire operator} van java (listing~\ref{bingetmaxdepth}).
+Je vindt de maximale diepte van een boom met de methode \verb+getMaxDepth+ die je implementeert in \verb+domain.BinaryTree.java+. Ook hier weer een oplossing met de \emph{ternaire operator} van java (listing~\ref{bingetmaxdepth}).
 \begin{lstlisting}[caption={De diepte van een binaire boom}, label=bingetmaxdepth]
 public int getDepth() {
 	return 1 + Math.max((this.leftTree == null ? 0 : this.leftTree.getDepth()), 

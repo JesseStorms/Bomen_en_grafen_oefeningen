@@ -125,12 +125,12 @@ child { node {9}
 
 
 \begin{oef}
-\papier \code Bestudeer de klasse \verb=BinarySearchTree= en de \verb=BinaryTree= in de package (\verb=domain=) in de \verb=src= folder.
+\papier \code Bestudeer de klasse \verb=domain.BinarySearchTree= en de \verb=domain.BinaryTree= in de package (\verb=domain=) in de \verb=src= folder.
  Een eerste  methode is \verb=lookUp= waarmee snel een bepaalde waarde in de BST kan opgezocht worden (zie de slides van deze les). Een tweede methode is \verb=addNode= waarmee gegeven data aan de BST kan toegevoegd worden.
 
 \begin{oefenumerate}
 \item Teken op papier eerst de binaire zoekboom zoals die door de \verb+main+ methode in de klasse \verb+BinarySearchTreeDriver+ zal worden toegevoegd.
-\item Implementeer de \verb=addNode= methode in de \verb=BinaryTree= klasse.  Maak optimaal gebruik van het feit dat de boom een binaire zoekboom is.
+\item Implementeer de \verb=addNode= methode in de \verb=domain.BinaryTree= klasse.  Maak optimaal gebruik van het feit dat de boom een binaire zoekboom is.
 \item Om je implementatie te controleren, run je de BinarySearchTreeDriver klasse uit de \verb+ui+ package. Verwachte uitvoer: 3 4 5 6 7 8 9  
 \end{oefenumerate}
 \begin{opl}
@@ -162,11 +162,11 @@ public boolean addNode(E data) {
 		return false; //geen twee keer zelfde data in BST
 	} else if (this.data.compareTo(data) > 0) {//ga naar linkersubboom
 		if (this.leftTree == null) {
-			this.leftTree = new BinarySearchTree<>(data);
+			this.leftTree = new domain.BinarySearchTree<>(data);
 			return true;
 		} else return (this.leftTree.addNode(data));
 	} else if (this.rightTree == null) {
-		this.rightTree = new BinarySearchTree<>(data);
+		this.rightTree = new domain.BinarySearchTree<>(data);
 		return true;
 	} else return (this.rightTree.addNode(data));
 }
@@ -177,7 +177,7 @@ public boolean addNode(E data) {
 
 
 \begin{oef}
-\code Implementeer nu ook de methode \verb=lookUp= in de \verb=BinaryTree= klasse en controleer je implementatie door in de BinarySearchTreeDriver-klasse een aantal knopen op te zoeken. Maak een efficiënte implementatie die de voordelen van een binaire zoekboom benut. Zoek ook een niet bestaande knoop op.
+\code Implementeer nu ook de methode \verb=lookUp= in de \verb=domain.BinaryTree= klasse en controleer je implementatie door in de BinarySearchTreeDriver-klasse een aantal knopen op te zoeken. Maak een efficiënte implementatie die de voordelen van een binaire zoekboom benut. Zoek ook een niet bestaande knoop op.
 \begin{opl}
 \begin{lstlisting}[caption={lookUp(data) methode}, label=bstlookUp]
 public boolean lookup(E data) {
@@ -206,7 +206,7 @@ public boolean lookup(E data) {
 \begin{oef}
 \code Het doel van deze oefening is een implementatie te maken van een methode die de grootste waarde uit de BST teruggeeft.
 \begin{oefenumerate}
-	\item Implementeer de \verb=searchGreatest= methode in de \verb=BinaryTree= klasse. 
+	\item Implementeer de \verb=searchGreatest= methode in de \verb=domain.BinaryTree= klasse.
 	\item Om je implementatie te controleren, run je de BinarySearchTreeDriver klasse uit de \verb+ui+ package. Verwachte uitvoer: De grootste waarde uit deze boom = 9 
 \end{oefenumerate}
 \begin{opl}
@@ -229,7 +229,7 @@ public E searchGreatest() {
 \begin{oef}
 \code Programmeer een methode die de kleinste waarde uit de BST teruggeeft.
 \begin{oefenumerate}
-	\item Implementeer de \verb=searchSmallest= methode in de \verb=BinaryTree= klasse.  
+	\item Implementeer de \verb=searchSmallest= methode in de \verb=domain.BinaryTree= klasse.
 	\item Om je implementatie te controleren, run je de BinarySearchTreeDriver klasse uit de \verb+ui+ package. Verwachte uitvoer: De kleinste waarde uit deze boom = 3
 \end{oefenumerate}
 \begin{opl}
@@ -252,7 +252,7 @@ public E searchSmallest() {
 
 Een volgende methode is \verb=removeNode= waarmee gegeven data uit de BST zal verwijderd worden indien mogelijk. 
 \begin{oefenumerate}
-\item Implementeer de \verb=removeNode= methode in de \verb=BinarySearchTree= klasse. 
+\item Implementeer de \verb=removeNode= methode in de \verb=domain.BinarySearchTree= klasse.
 \item Om je implementatie te controleren, kan je de klasse  \verb=BinarySearchTreeDriver= aanpassen en uit de opgebouwde BST uit oefening 4 de knoop met dataveld 9 te verwijderen.
 
 	
@@ -336,7 +336,7 @@ public boolean removeNode(E data) {
 \begin{oef}
 \papier \code Een probleem dat weggesnoeid moet worden …
 \begin{oefenumerate}
-\item Implementeer de \verb=countNodes= methode in de \verb=BinarySearchTree= klasse die het aantal knopen in een boom telt. Na de verwijdering van de knoop met data-veld 9 valt iets eigenaardigs op: het verwijderen van de knoop heeft geen effect op het aantal knopen. We onderzoeken dat in de volgende deelvragen.
+\item Implementeer de \verb=countNodes= methode in de \verb=domain.BinarySearchTree= klasse die het aantal knopen in een boom telt. Na de verwijdering van de knoop met data-veld 9 valt iets eigenaardigs op: het verwijderen van de knoop heeft geen effect op het aantal knopen. We onderzoeken dat in de volgende deelvragen.
 	\item Teken  de boom die je na het verwijderen van de knoop met waarde 9 kreeg. Eén van de bladeren van de boom heeft nu als data de waarde \verb+null+ gekregen.
 	\item Blaadjes met als datawaarde \verb+null+ laten we niet aan de boom staan. Tijd om te snoeien! Schrijf een methode \verb+cleanUp()+ die deze ‘verdorde’ blaadjes verwijdert. Pas ze toe op de boom na het verwijderen van de knoop met waarde 9 en laat zien dat het aantal knopen na de snoeibeurt wel degelijk ééntje verminderd is.  
 	\item Voeg nog twee knopen toe aan de BST uit oefening 4 met data-velden 10 en 11. Schrijf de boom uit na een in-order wandeling (verwachte uitvoer: 3,4,5,6,7,8,9,10,11). Verwijder tenslotte uit deze boom data-veld 9, data-veld 11 en data-veld 6 en ruim lege blaadjes op. De verwachte uitvoer van een in-order wandeling is dan: 3 4 5 7 8 10.
@@ -388,7 +388,7 @@ child { node {8}
     \label{fig:oefgetpathboom}
 \end{figure}
 \begin{oefenumerate}
-	\item Implementeer de \verb=getPath= methode in de \verb=BinarySearchTree= klasse. 
+	\item Implementeer de \verb=getPath= methode in de \verb=domain.BinarySearchTree= klasse.
 	\item Als controle pas je de klasse  \verb=BinarySearchTreeDriver= aan zodat je drie keer de methode \verb+getPath+ oproept met als parameter respectievelijk 7, 4 en 8. De uitvoer moet dan respectievelijk zijn: bij 7: [5,8,7] ; bij 4: [5, 4] en bij 8: [5, 8]. Probeer de methode ook uit met als parameter 22. In dit geval moet de methode \verb+null+ als returnwaarde hebben.
 	
 \end{oefenumerate}
