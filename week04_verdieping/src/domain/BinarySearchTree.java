@@ -31,30 +31,28 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 	}
 
 	@Override
-	public boolean addNode(E data) {
+	public BinarySearchTree addNode(E data) {
 		if (this.data.compareTo(data) == 0) {
-			return false;
+			return null;
 		} else {
 			if (data.compareTo(this.data) < 0) {
 				if (this.leftTree == null) {
 					this.leftTree = new BinarySearchTree<E>(data);
-					return true;
+					return (BinarySearchTree) this.leftTree;
 				} else {
-					return this.leftTree.addNode(data);
+					return (BinarySearchTree) this.leftTree.addNode(data);
 				}
 			}
 			else {
 				if (this.rightTree == null) {
 					this.rightTree = new BinarySearchTree<E>(data);
-					return true;
+					return (BinarySearchTree) this.rightTree;
 				} else {
-					return this.rightTree.addNode(data);
+					return (BinarySearchTree) this.rightTree.addNode(data);
 				}
 			}
 		}
 	}
-
-
 
 
 
